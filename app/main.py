@@ -12,8 +12,8 @@ def main():
 def execute_command(command):
     if command == "exit":
         exit()
-    if command.split(" ")[0] == "echo":
-        print(f"{" ".join(command.split(" ")[1:])}")
+    elif command.startwith("echo "):
+        print(f"{command[5:]}")
     else:
         sys.stdout.write(f"{command}: command not found")
         sys.stdout.write("\n")
