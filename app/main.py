@@ -11,9 +11,14 @@ def main():
 
 def execute_command(command):
     if command == "exit":
-        exit()
-    elif command.startwith("echo "):
+        sys.exit(0)
+    elif command.startswith("echo "):
         print(f"{command[5:]}")
+    elif command.startswith("type "):
+        if command[5:] in ["echo", "exit", "type"]:
+            print(f"{command[5:]} is a shell builtin")
+        else:
+            print(f"{command[5:]}: not found")
     else:
         sys.stdout.write(f"{command}: command not found")
         sys.stdout.write("\n")
