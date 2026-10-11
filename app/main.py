@@ -1,4 +1,7 @@
+from os import path
 import sys
+import shutil
+
 
 
 def main():
@@ -17,6 +20,8 @@ def execute_command(command):
     elif command.startswith("type "):
         if command[5:] in ["echo", "exit", "type"]:
             print(f"{command[5:]} is a shell builtin")
+        elif path := shutil.which(command[5:]):
+            print(f"{command[5:]} is {path}")
         else:
             print(f"{command[5:]}: not found")
     else:
