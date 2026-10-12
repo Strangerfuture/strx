@@ -12,20 +12,32 @@ def main():
         execute_command(command)
 
 
+def is_builtin(command):
+    return command in {"echo", "exit", "type"}
+
+
+
+
 def execute_command(command):
-    if command == "exit":
-        sys.exit(0)
-    elif command.startswith("echo "):
-        print(f"{command[5:]}")
-    elif command.startswith("type "):
-        if command[5:] in ["echo", "exit", "type"]:
-            print(f"{command[5:]} is a shell builtin")
-        elif path := shutil.which(command[5:]):
-            print(f"{command[5:]} is {path}")
-        else:
-            print(f"{command[5:]}: not found")
+
+    parts = command.split()
+    cmd = parts[0]
+    args = parts[1:] if len(parts) > 1 else ""
+
+    if  is_builtin(cmd):
+        if cmd == "exit":
+            sys.exit(0)
+        elif cmd == "echo":
+            print(f"{" ".join(args)}")
+        elif cmd == "type":
+            if is_builtin(args[0]):
+                print(f"{args[0]} is a shell builtin")
+            elif path := shutil.which(args[0]):
+                print(f"{cmd} is {path}")
+            else:
+                print(f"{cmd}: not found")
     else:
-        sys.stdout.write(f"{command}: command not found")
+        sys.stdout.write(f"{cmd}: command not found")
         sys.stdout.write("\n")
 
 if __name__ == "__main__":
