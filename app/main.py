@@ -16,7 +16,7 @@ def main():
 
 
 def is_builtin(command):
-    return command in {"echo", "exit", "type", "pwd"}
+    return command in {"echo", "exit", "type", "pwd", "cd"}
 
 
 
@@ -41,6 +41,11 @@ def execute_command(command):
                 print(f"{args[0]}: not found")
         elif cmd == "pwd":
             print(f"{os.getcwd()}")
+        elif cmd == "cd":
+            if Path(args[0]).exists():
+                os.chdir(Path(args[0]))
+            else:
+                print(f"cd: {args[0]}: No such file or directory")
     elif path := shutil.which(cmd):
         subprocess.run(parts)
     else:
