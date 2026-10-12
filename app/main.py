@@ -42,7 +42,9 @@ def execute_command(command):
         elif cmd == "pwd":
             print(f"{os.getcwd()}")
         elif cmd == "cd":
-            if Path(args[0]).exists():
+            if args[0] == "~":
+                    os.chdir(Path(os.getenv("HOME")))
+            elif Path(args[0]).exists():
                 os.chdir(Path(args[0]))
             else:
                 print(f"cd: {args[0]}: No such file or directory")
