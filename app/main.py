@@ -1,4 +1,5 @@
 from os import path
+import subprocess
 import sys
 import shutil
 
@@ -33,9 +34,11 @@ def execute_command(command):
             if is_builtin(args[0]):
                 print(f"{args[0]} is a shell builtin")
             elif path := shutil.which(args[0]):
-                print(f"{cmd} is {path}")
+                print(f"{args[0]} is {path}")
             else:
-                print(f"{cmd}: not found")
+                print(f"{args[0]}: not found")
+    elif path := shutil.which(cmd):
+        subprocess.run(parts)
     else:
         sys.stdout.write(f"{cmd}: command not found")
         sys.stdout.write("\n")
