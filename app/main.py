@@ -1,7 +1,9 @@
-from os import path
+import os
+from pathlib import Path
+import shutil
 import subprocess
 import sys
-import shutil
+
 
 
 
@@ -14,7 +16,7 @@ def main():
 
 
 def is_builtin(command):
-    return command in {"echo", "exit", "type"}
+    return command in {"echo", "exit", "type", "pwd"}
 
 
 
@@ -37,6 +39,8 @@ def execute_command(command):
                 print(f"{args[0]} is {path}")
             else:
                 print(f"{args[0]}: not found")
+        elif cmd == "pwd":
+            print(f"{os.getcwd()}")
     elif path := shutil.which(cmd):
         subprocess.run(parts)
     else:
