@@ -35,10 +35,9 @@ cd strix
 Run the shell:
 
 ```bash
-python main.py
+python app/main.py
 ```
 
-> Replace `main.py` with the actual entry-point filename if your project uses a different one.
 
 ## Usage
 
@@ -62,10 +61,10 @@ Available commands and their behavior depend on the current implementation.
 
 ## Roadmap
 
-- [ ] Interactive command prompt
-- [ ] External command execution
-- [ ] Built-in commands such as `cd` and `exit`
-- [ ] Command-line argument parsing
+- [x] Interactive command prompt
+- [x] External command execution
+- [x] Built-in commands such as `cd` and `exit`
+- [x] Command-line argument parsing
 - [ ] Environment variable support
 - [ ] Input and output redirection
 - [ ] Pipes between commands
