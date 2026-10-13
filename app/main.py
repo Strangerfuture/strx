@@ -3,6 +3,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import shlex
 
 
 
@@ -23,7 +24,7 @@ def is_builtin(command):
 
 def execute_command(command):
 
-    parts = command.split()
+    parts = shlex.split(command)
     cmd = parts[0]
     args = parts[1:] if len(parts) > 1 else ""
 
